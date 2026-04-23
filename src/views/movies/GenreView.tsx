@@ -1,4 +1,5 @@
 import { GENRE_ENDPOINT } from "@core/constants";
+import { useParams } from "react-router-dom";
 
 const MOVIE_GENRES = [
     { name: "Action", id: 28 },
@@ -27,5 +28,7 @@ const TV_GENRES = [
 ];
 
 export const GenreView = () => {
+    
+    
     return <></>
 };
