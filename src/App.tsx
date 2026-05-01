@@ -7,9 +7,9 @@ export const App = () => {
     <Routes>
       <Route path="/" element={<HomeView />} />
       <Route element={<MainLayout />}>
-        <Route path="/movies" element={<Navigate to="/movies/category/now_playing" replace />} />
+        {/* <Route path="/movies" element={<Navigate to="/movies/category/now_playing" replace />} /> */}
         <Route path="/movies/category/:category" element={<MoviesView />} />
-        <Route path="/trending" element={<TrendingView />} />
+        <Route path="/trending/:category" element={<TrendingView />} />
         <Route path="/search" element={<SearchView />} />
         <Route path="/movie/:id" element={<MovieView />}>
           <Route path="credits" element={<CreditsView />} />
