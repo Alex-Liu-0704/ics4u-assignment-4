@@ -24,16 +24,16 @@ export const MoviesView = () => {
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;
   }
-  
+
   return (
     <section className="max-w-[1200px] mx-auto p-5 space-y-5">
       <h1 className="text-3xl font-bold mb-4">Movies</h1>
       <LinkGroup
         options={[
           { label: 'Now Playing', to: '/movies/category/now_playing' },
-          { label: 'Popular',     to: '/movies/category/popular'     },
-          { label: 'Top Rated',   to: '/movies/category/top_rated'   },
-          { label: 'Upcoming',    to: '/movies/category/upcoming'    },
+          { label: 'Popular', to: '/movies/category/popular' },
+          { label: 'Top Rated', to: '/movies/category/top_rated' },
+          { label: 'Upcoming', to: '/movies/category/upcoming' },
         ]}
       />
       <ImageGrid results={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
