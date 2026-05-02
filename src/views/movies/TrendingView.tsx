@@ -11,7 +11,8 @@ export const TrendingView = () => {
   const { category } = useParams<{ category: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'day';
-  const { data } = useTmdb<TrendingResponse>(`${TRENDING_ENDPOINT}/${category}/${interval}`, { page }, [category, interval, page]);
+  const formatCategory = category === 'movies' ? 'movie' : 'tv'
+  const { data } = useTmdb<TrendingResponse>(`${TRENDING_ENDPOINT}/${formatCategory}/${interval}`, { page }, [category, interval, page]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
@@ -33,7 +34,7 @@ export const TrendingView = () => {
         {/* <h1 className="text-3xl font-bold">Now Playing</h1> */}
         <LinkGroup
           options={[
-            { label: 'Movies', to: `/trending/movie?interval=${interval}` },
+            { label: 'Movies', to: `/trending/movies?interval=${interval}` },
             { label: 'TV', to: `/trending/tv?interval=${interval}` },
           ]} />
         <ButtonGroup
@@ -45,7 +46,7 @@ export const TrendingView = () => {
           onClick={(value) => setSearchParams({ interval: value })}
         />
       </div>
-      <ImageGrid results={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
+      <ImageGrid results={gridData} onClick={(id) => navigate(`/${category}/${id}/credits`)} />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );
