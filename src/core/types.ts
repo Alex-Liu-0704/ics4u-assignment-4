@@ -7,6 +7,16 @@ export type MoviesResponse = {
   total_pages: number;
 };
 
+export type TrendingResponse = {
+  results: Array<{
+    id: number;
+    original_title?: string;
+    name?: string;
+    poster_path: string;
+  }>;
+  total_pages: number;
+};
+
 export type MovieRepsonse = {
   id: number;
   title: string;

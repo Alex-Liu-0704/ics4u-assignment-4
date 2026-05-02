@@ -1,22 +1,27 @@
 import { ButtonGroup, ImageGrid, LinkGroup, Pagination } from '@/components';
 import { TRENDING_ENDPOINT } from '@/core/constants';
-import type { MoviesResponse } from '@/core/types';
+import type { TrendingResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
-import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 export const TrendingView = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
+  const { category } = useParams<{ category: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'day';
-  const { data } = useTmdb<MoviesResponse>(`${TRENDING_ENDPOINT}/${interval}`, { page, time_window: interval }, [page, interval]);
+  const { data } = useTmdb<TrendingResponse>(`${TRENDING_ENDPOINT}/${category}/${interval}`, { page }, [category, interval, page]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
     imagePath: result.poster_path,
-    primaryText: result.original_title,
+    primaryText: result.original_title ?? result.name ?? '',
   }));
+
+  useEffect(() => {
+    setPage(1);
+  }, [category, interval]);
 
   if (!data) {
     return <p className="text-center text-gray-400">Loading...</p>;
@@ -28,8 +33,8 @@ export const TrendingView = () => {
         {/* <h1 className="text-3xl font-bold">Now Playing</h1> */}
         <LinkGroup
           options={[
-            { label: 'Movies', to: '/trending/movies' },
-            { label: 'TV', to: '/trending/tv' },
+            { label: 'Movies', to: `/trending/movie?interval=${interval}` },
+            { label: 'TV', to: `/trending/tv?interval=${interval}` },
           ]} />
         <ButtonGroup
           value={interval}
