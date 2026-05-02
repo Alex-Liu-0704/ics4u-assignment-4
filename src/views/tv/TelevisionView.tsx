@@ -1,20 +1,20 @@
 import { ImageGrid, LinkGroup, Pagination } from '@/components';
-import { MOVIE_ENDPOINT } from '@/core/constants';
-import type { MoviesResponse } from '@/core/types';
+import { TV_ENDPOINT } from '@/core/constants';
+import type { TvResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
  
-export const MoviesView = () => {
+export const TelevisionView = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
   const { category } = useParams<{ category: string }>();
-  const { data } = useTmdb<MoviesResponse>(`${MOVIE_ENDPOINT}/${category}`, { page }, [category, page]);
+  const { data } = useTmdb<TvResponse>(`${TV_ENDPOINT}/${category}`, { page }, [category, page]);
   
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,
     imagePath: result.poster_path,
-    primaryText: result.original_title,
+    primaryText: result.name,
   }));
 
   useEffect(() => {
@@ -27,16 +27,16 @@ export const MoviesView = () => {
 
   return (
     <section className="max-w-[1200px] mx-auto p-5 space-y-5">
-      {/* <h1 className="text-3xl font-bold mb-4">Movies</h1> */}
+      {/* <h1 className="text-3xl font-bold mb-4">Television</h1> */}
       <LinkGroup
         options={[
-          { label: 'Now Playing', to: '/movies/category/now_playing' },
-          { label: 'Popular', to: '/movies/category/popular' },
-          { label: 'Top Rated', to: '/movies/category/top_rated' },
-          { label: 'Upcoming', to: '/movies/category/upcoming' },
+          { label: 'Airing Today', to: '/tv/category/airing_today' },
+          { label: 'On The Air', to: '/tv/category/on_the_air' },
+          { label: 'Popular', to: '/tv/category/popular' },
+          { label: 'Top Rated', to: '/tv/category/top_rated' },
         ]}
       />
-      <ImageGrid results={gridData} onClick={(id) => navigate(`/movie/${id}/credits`)} />
+      <ImageGrid results={gridData} onClick={(id) => navigate(`/tv/${id}/credits`)} />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );
