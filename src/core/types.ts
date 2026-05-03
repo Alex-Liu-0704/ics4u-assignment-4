@@ -26,14 +26,18 @@ export type GenreResponse = {
   total_pages: number;
 };
 
-export type MovieRepsonse = {
+export type DetailsResponse = {
   id: number;
-  title: string;
+  title?: string;
+  name?: string;
   overview: string;
   poster_path: string;
   backdrop_path: string;
-  release_date: string;
-  vote_average: string;
+  release_date?: string;
+  first_air_date?: string;
+  vote_average: number;
+  number_of_seasons?: number;
+  number_of_episodes?: number;
   videos?: {
     results: Array<{
       key: string;
@@ -43,6 +47,24 @@ export type MovieRepsonse = {
     }>;
   };
 };
+
+// export type MovieRepsonse = {
+//   id: number;
+//   title: string;
+//   overview: string;
+//   poster_path: string;
+//   backdrop_path: string;
+//   release_date: string;
+//   vote_average: string;
+//   videos?: {
+//     results: Array<{
+//       key: string;
+//       name: string;
+//       site: string;
+//       type: string;
+//     }>;
+//   };
+// };
 
 export type CreditsResponse = {
   cast: Array<{

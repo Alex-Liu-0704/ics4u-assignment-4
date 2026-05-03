@@ -1,21 +1,27 @@
 import { MainLayout } from '@/layouts/MainLayout';
 import { CreditsView, ErrorView, GenreView, HomeView, MovieView, MoviesView, ReviewsView, SearchView, TelevisionView, TrendingView } from '@/views';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomeView />} />
       <Route element={<MainLayout />}>
-        {/* <Route path="/movies" element={<Navigate to="/movies/category/now_playing" replace />} /> */}
         <Route path="/movies/category/:category" element={<MoviesView />} />
         <Route path="/tv/category/:category" element={<TelevisionView />} />
         <Route path="/trending/:category" element={<TrendingView />} />
         <Route path="/genre/:category/:genre" element={<GenreView />} />
         <Route path="/search" element={<SearchView />} />
-        <Route path="/movies/:id" element={<MovieView />}>
+        <Route path="/movies/:id" element={<MovieView isMovie={true} />}>
           <Route path="credits" element={<CreditsView />} />
+          {/* <Route path="trailers" element={<TrailersView />} /> */}
           <Route path="reviews" element={<ReviewsView />} />
+        </Route>
+        <Route path="/tv/:id" element={<MovieView isMovie={false} />}>
+          <Route path="credits" element={<CreditsView />} />
+          {/* <Route path="trailers" element={<TrailersView />} /> */}
+          <Route path="reviews" element={<ReviewsView />} />
+          {/* <Route path="seasons" element={<SeasonsView />} /> */}
         </Route>
       </Route>
       <Route path="*" element={<ErrorView />} />
