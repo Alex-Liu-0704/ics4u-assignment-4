@@ -5,14 +5,10 @@ import { useTmdb } from '@/hooks';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
-type CategoryProps = {
-  isMovie: boolean;
-};
-
-export const MovieView = ({ isMovie }: CategoryProps) => {
+export const MovieView = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
-  const endpoint = isMovie ? `${MOVIE_ENDPOINT}/${id}` : `${TV_ENDPOINT}/${id}`;
+  const { category, id } = useParams<{ id: string; category: string }>();;
+  const endpoint = category === 'movies' ? `${MOVIE_ENDPOINT}/${id}` : `${TV_ENDPOINT}/${id}`;
   const { data } = useTmdb<DetailsResponse>(endpoint, {}, [id]);
 
   // const trailerVideo =
@@ -40,7 +36,7 @@ export const MovieView = ({ isMovie }: CategoryProps) => {
               <FaCalendarAlt />
               {data.release_date ?? data.first_air_date}
             </p>
-            {!isMovie && (
+            {category === 'movie' && (
               <p className="text-gray-400">
                 {data.number_of_seasons} Seasons - {data.number_of_episodes} Episodes
               </p>
@@ -57,7 +53,7 @@ export const MovieView = ({ isMovie }: CategoryProps) => {
               </div>
             )} */}
             <LinkGroup
-              options={isMovie ? [
+              options={category === 'movies' ? [
                 { label: 'Credits', to: 'credits' },
                 { label: 'Trailers', to: 'trailers' },
                 { label: 'Reviews', to: 'reviews' },

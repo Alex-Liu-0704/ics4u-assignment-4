@@ -12,16 +12,11 @@ export const App = () => {
         <Route path="/trending/:category" element={<TrendingView />} />
         <Route path="/genre/:category/:genre" element={<GenreView />} />
         <Route path="/search" element={<SearchView />} />
-        <Route path="/movies/:id" element={<MovieView isMovie={true} />}>
+        <Route path="/:category/:id" element={<MovieView />}>
+          {/* <Route path="seasons/:season" element={<EpisodeView />} /> */}
           <Route path="credits" element={<CreditsView />} />
           {/* <Route path="trailers" element={<TrailersView />} /> */}
           <Route path="reviews" element={<ReviewsView />} />
-        </Route>
-        <Route path="/tv/:id" element={<MovieView isMovie={false} />}>
-          <Route path="credits" element={<CreditsView />} />
-          {/* <Route path="trailers" element={<TrailersView />} /> */}
-          <Route path="reviews" element={<ReviewsView />} />
-          {/* <Route path="seasons" element={<SeasonsView />} /> */}
         </Route>
       </Route>
       <Route path="*" element={<ErrorView />} />
