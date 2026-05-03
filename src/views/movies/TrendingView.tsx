@@ -1,6 +1,6 @@
 import { ButtonGroup, ImageGrid, LinkGroup, Pagination } from '@/components';
 import { TRENDING_ENDPOINT } from '@/core/constants';
-import type { TrendingResponse } from '@/core/types';
+import type { GenreResponse } from '@/core/types';
 import { useTmdb } from '@/hooks';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ export const TrendingView = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'day';
   const formatCategory = category === 'movies' ? 'movie' : 'tv'
-  const { data } = useTmdb<TrendingResponse>(`${TRENDING_ENDPOINT}/${formatCategory}/${interval}`, { page }, [category, interval, page]);
+  const { data } = useTmdb<GenreResponse>(`${TRENDING_ENDPOINT}/${formatCategory}/${interval}`, { page }, [category, interval, page]);
 
   const gridData = (data?.results ?? []).map((result) => ({
     id: result.id,

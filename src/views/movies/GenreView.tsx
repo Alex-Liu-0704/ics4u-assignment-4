@@ -1,5 +1,9 @@
-import { GENRE_ENDPOINT } from "@core/constants";
-import { useParams } from "react-router-dom";
+import { ImageGrid, LinkGroup, Pagination } from '@/components';
+import { GENRE_ENDPOINT } from '@/core/constants';
+import type { GenreResponse } from '@/core/types';
+import { useTmdb } from '@/hooks';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const MOVIE_GENRES = [
     { name: "Action", id: 28 },
@@ -28,7 +32,45 @@ const TV_GENRES = [
 ];
 
 export const GenreView = () => {
-    
-    
-    return <></>
+    const navigate = useNavigate();
+    const { category, genre } = useParams<{ category: string; genre: string }>();
+    const [page, setPage] = useState<number>(1);
+    const formatCategory = category === 'movies' ? 'movie' : category;
+    const genres = formatCategory === 'tv' ? TV_GENRES : MOVIE_GENRES;
+    const genreId = genres.find((item) => item.name.toLowerCase() === genre)?.id;
+
+    const { data } = useTmdb<GenreResponse>(`${GENRE_ENDPOINT}/${formatCategory}`, { with_genres: genreId, page }, [formatCategory, genreId, page]);
+
+    const gridData = (data?.results ?? []).map((result) => ({
+        id: result.id,
+        imagePath: result.poster_path,
+        primaryText: result.original_title ?? result.name ?? '',
+    }));
+
+    useEffect(() => {
+        setPage(1);
+    }, [category, genre]);
+
+    if (!data) {
+        return <p className="text-center text-gray-400">Loading...</p>;
+    }
+
+    return (
+        <section className="max-w-[1200px] mx-auto p-5 space-y-5">
+            <LinkGroup
+                options={[
+                    { label: 'Movies', to: `/genre/movies/action` },
+                    { label: 'TV', to: `/genre/tv/action` },
+                ]}
+            />
+            <LinkGroup
+                options={genres.map((item) => ({
+                    label: item.name,
+                    to: `/genre/${category}/${item.name.toLowerCase()}`,
+                }))}
+            />
+            <ImageGrid results={gridData} onClick={(id) => navigate(`/${category}/${id}/credits`)} />
+            <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
+        </section>
+    );
 };

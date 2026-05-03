@@ -8,8 +8,8 @@ export const Header = () => {
         <Link to="/movies/category/now_playing">Movies</Link>
         <Link to="/tv/category/airing_today">TV</Link>
         <Link to="/trending/movies?interval=day">Trending</Link>
+        <Link to="/genre/movies/action">Genre</Link>
         <Link to="/search">Search</Link>
-        <Link to="/genre">Genre</Link>
       </nav>
     </header>
   );

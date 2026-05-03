@@ -16,7 +16,7 @@ export type TvResponse = {
   total_pages: number;
 };
 
-export type TrendingResponse = {
+export type GenreResponse = {
   results: Array<{
     id: number;
     original_title?: string;
