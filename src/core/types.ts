@@ -61,6 +61,19 @@ export type SeasonsResponse = {
   }>;
 };
 
+export type EpisodeResponse = {
+  name: string;
+  air_date: string;
+  overview: string;
+  episodes: Array<{
+    id: number;
+    name: string;
+    still_path: string | null;
+    episode_number: number;
+    air_date: string;
+  }>;
+};
+
 export type CreditsResponse = {
   cast: Array<{
     id: number;
@@ -76,6 +89,15 @@ export type ReviewsResponse = {
     author: string;
     content: string;
   }>;
+};
+
+export type PersonResponse = {
+  id: number;
+  name: string;
+  biography: string;
+  place_of_birth: string;
+  birthday: string;
+  profile_path: string;
 };
 
 export type SearchResponse = {
