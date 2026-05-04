@@ -51,6 +51,16 @@ export type TrailersResponse = {
   };
 };
 
+export type SeasonsResponse = {
+  seasons: Array<{
+    id: number;
+    name: string;
+    season_number: number;
+    poster_path: string | null;
+    air_date: string;
+  }>;
+};
+
 export type CreditsResponse = {
   cast: Array<{
     id: number;
