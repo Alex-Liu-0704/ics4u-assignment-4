@@ -27,7 +27,7 @@ export const TrailersView = () => {
                 title="Movie Trailer"
                 allowFullScreen
               />
-              <p className="text-sm text-gray-400">{video.name}</p>
+              <p className="text-sm text-gray-400 mt-2">{video.name}</p>
             </div>
           ))}
         </div>
