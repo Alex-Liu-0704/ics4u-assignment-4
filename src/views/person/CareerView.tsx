@@ -7,6 +7,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 export const CareerView = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  // const { data } = useTmdb<CareerResponse>(`${PERSON_ENDPOINT}/${id}/combined_credits`, {}, [id]);
+
+  // const gridData = (data?.cast ?? []).map((result) => ({
+  //   id: result.id,
+  //   imagePath: result.poster_path,
+  //   primaryText: result.title,
+  //   secondaryText: result.character,
+  // }));
+
+  // if (!data) {
+  //   return <p className="text-center text-gray-400">Loading...</p>;
+  // }
+
   const { data: movieCredits } = useTmdb<CareerResponse>(`${PERSON_ENDPOINT}/${id}/movie_credits`, {}, [id]);
   const { data: tvCredits } = useTmdb<CareerResponse>(`${PERSON_ENDPOINT}/${id}/tv_credits`, {}, [id]);
 

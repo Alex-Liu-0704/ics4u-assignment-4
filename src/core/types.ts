@@ -107,6 +107,7 @@ export type CareerResponse = {
     name?: string;
     poster_path: string | null;
     character: string;
+    media_type: string;
   }>;
 };
 

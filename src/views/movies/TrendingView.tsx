@@ -46,7 +46,7 @@ export const TrendingView = () => {
           onClick={(value) => setSearchParams({ interval: value })}
         />
       </div>
-      <ImageGrid results={gridData} onClick={(id) => navigate(`/${category}/${id}/credits`)} />
+      <ImageGrid results={gridData} onClick={(id) => category === 'movies' ? navigate(`/${category}/${id}/credits`) : navigate(`/${category}/${id}/seasons`)} />
       <Pagination page={page} maxPages={data.total_pages} onClick={setPage} />
     </section>
   );
