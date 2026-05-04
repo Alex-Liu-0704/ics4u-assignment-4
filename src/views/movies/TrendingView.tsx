@@ -8,7 +8,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 export const TrendingView = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
-  const { category } = useParams<{ category: string }>();
+  const { category } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const interval = searchParams.get('interval') || 'day';
   const formatCategory = category === 'movies' ? 'movie' : 'tv'

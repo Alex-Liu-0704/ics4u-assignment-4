@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 export const MoviesView = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState<number>(1);
-  const { category } = useParams<{ category: string }>();
+  const { category } = useParams();
   const { data } = useTmdb<MoviesResponse>(`${MOVIE_ENDPOINT}/${category}`, { page }, [category, page]);
   
   const gridData = (data?.results ?? []).map((result) => ({

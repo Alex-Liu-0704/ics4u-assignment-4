@@ -33,7 +33,7 @@ const TV_GENRES = [
 
 export const GenreView = () => {
     const navigate = useNavigate();
-    const { category, genre } = useParams<{ category: string; genre: string }>();
+    const { category, genre } = useParams();
     const [page, setPage] = useState<number>(1);
     const formatCategory = category === 'movies' ? 'movie' : category;
     const genres = formatCategory === 'tv' ? TV_GENRES : MOVIE_GENRES;

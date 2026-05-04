@@ -7,7 +7,7 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 export const MovieView = () => {
   const navigate = useNavigate();
-  const { category, id } = useParams<{ id: string; category: string }>();;
+  const { category, id } = useParams();
   const endpoint = category === 'movies' ? `${MOVIE_ENDPOINT}/${id}` : `${TV_ENDPOINT}/${id}`;
   const { data } = useTmdb<DetailsResponse>(endpoint, {}, [id]);
 
