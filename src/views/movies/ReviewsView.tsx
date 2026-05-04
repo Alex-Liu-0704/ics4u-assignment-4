@@ -14,7 +14,6 @@ export const ReviewsView = () => {
   return (
     <section className="px-2 space-y-4">
       <h2 className="text-2xl font-bold">Reviews</h2>
-
       {data.results.length ? (
         data.results.slice(0, 5).map((review) => (
           <div key={review.id} className="bg-gray-800 p-5 rounded-xl shadow">

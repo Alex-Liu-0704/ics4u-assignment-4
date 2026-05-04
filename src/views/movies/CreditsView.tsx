@@ -5,10 +5,10 @@ import { useTmdb } from '@/hooks';
 import { useParams, useNavigate } from 'react-router-dom';
 
 export const CreditsView = () => {
-  const navitage = useNavigate();
+  const navigate = useNavigate();
   const { id, category } = useParams();
-  const endpoint = category === 'movies' ? `${MOVIE_ENDPOINT}/${id}/credits` : `${TV_ENDPOINT}/${id}/credits`;
-  const { data } = useTmdb<CreditsResponse>(endpoint, {}, []);
+  const endpoint = category === 'movies' ? `${MOVIE_ENDPOINT}/${id}` : `${TV_ENDPOINT}/${id}`;
+  const { data } = useTmdb<CreditsResponse>(`${endpoint}/credits`, {}, []);
 
   const gridData = (data?.cast ?? []).map((result) => ({
     id: result.id,
@@ -24,7 +24,8 @@ export const CreditsView = () => {
   return (
     <section className="px-2">
       <h2 className="text-2xl font-bold mb-6">Credits</h2>
-      {data.cast.length ? <ImageGrid results={gridData} /> : <p className="text-gray-400 text-center">No credits available.</p>}
+      {data.cast.length ? <ImageGrid results={gridData} onClick={(id) => navigate(`/person/${id}`)} />
+        : <p className="text-gray-400 text-center">No credits available.</p>}
     </section>
   );
 };
