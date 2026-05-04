@@ -59,8 +59,16 @@ export const GenreView = () => {
         <section className="max-w-[1200px] mx-auto p-5 space-y-5">
             <LinkGroup
                 options={[
-                    { label: 'Movies', to: `/genre/movies/action` },
-                    { label: 'TV', to: `/genre/tv/action` },
+                    {
+                        label: 'Movies',
+                        to: `/genre/movies/action`,
+                        match: ['/genre/movies/:genre']
+                    },
+                    {
+                        label: 'TV',
+                        to: `/genre/tv/action`,
+                        match: ['/genre/tv/:genre']
+                    },
                 ]}
             />
             <LinkGroup
