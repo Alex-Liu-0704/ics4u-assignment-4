@@ -12,4 +12,5 @@ export * from '@/views/movies/TrailersView';
 export * from '@/views/tv/SeasonsView'
 export * from '@/views/tv/EpisodeView';
 export * from '@/views/person/PersonView';
-export * from '@/views/person/CareerView'
+export * from '@/views/person/CareerView';
+export * from '@/views/person/ImagesView';

@@ -110,6 +110,12 @@ export type CareerResponse = {
   }>;
 };
 
+export type ImagesResponse = {
+  profiles: Array<{
+    file_path: string;
+  }>;
+};
+
 export type SearchResponse = {
   results: Array<{
     id: number;
