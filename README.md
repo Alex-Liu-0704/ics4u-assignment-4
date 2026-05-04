@@ -1,4 +1,4 @@
-Movie display website built with:
+# Movie display website built with:
 
 - Vite
 - React
